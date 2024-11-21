@@ -15,8 +15,7 @@ public:
 	// Sets default values for this pawn's properties
 	ABasePawn();
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	float Speed = 400.f;
+	
 
 	UPROPERTY(VisibleDefaultsOnly)
 	int32 VisibleDefaultsOnlyInt = 5;
@@ -41,7 +40,5 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
-	// Called to bind functionality to input
-	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
-
+	
 };
