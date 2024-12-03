@@ -23,6 +23,16 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
+	void HandleDestruction();
+
+	APlayerController* GetTankPlayerController() const { return TankPlayerController; }
+
+	bool bIsAlive = true;
+
+	//Double damage
+	bool IsDoubleDamageActive() const { return bIsDoubleDamageActive; }
+	void ActivateDoubleDamage();
+
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
@@ -44,5 +54,11 @@ private:
 	void Move(float Value);
 	void Turn(float Value);
 
-	APlayerController* PlayerControllerRef;
+	APlayerController* TankPlayerController;
+
+	//Double damage section
+	bool bIsDoubleDamageActive = false;
+	FTimerHandle DoubleDamageTimer;
+	
+	void ResetDoubleDamage();
 };

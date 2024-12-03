@@ -30,26 +30,26 @@ void ATank::Tick(float DeltaTime)
 {
     Super::Tick(DeltaTime);
 
-    if(PlayerControllerRef)
+    if(TankPlayerController)
     {
         FHitResult HitResult;
-        PlayerControllerRef->GetHitResultUnderCursor(
+        TankPlayerController->GetHitResultUnderCursor(
             ECollisionChannel::ECC_Visibility, 
             false,
             HitResult);
 
-        //This draws the debug Sphere
-        DrawDebugSphere(
-        GetWorld(), 
-        HitResult.ImpactPoint,
-        25.f,
-        12,
-        FColor::Red,
-        false,
-        -1.f);
+       
 
         RotateTurret(HitResult.ImpactPoint);
     }
+}
+
+void ATank::HandleDestruction()
+{
+    Super::HandleDestruction();
+    SetActorHiddenInGame(true);
+    SetActorTickEnabled(false);
+    bIsAlive = false;
 }
 
 // Called when the game starts or when spawned
@@ -57,7 +57,7 @@ void ATank::BeginPlay()
 {
 	Super::BeginPlay();
 
-    PlayerControllerRef = Cast<APlayerController>(GetController());
+    TankPlayerController = Cast<APlayerController>(GetController());
 
     
 	
@@ -78,4 +78,16 @@ void ATank::Turn(float Value)
     // Yaw = Value * DeltaTime * TurnRate
     DeltaRotation.Yaw = Value * TurnRate * UGameplayStatics::GetWorldDeltaSeconds(this);
     AddActorLocalRotation(DeltaRotation, true);
+}
+
+//double damage section
+void ATank::ActivateDoubleDamage()
+{
+    bIsDoubleDamageActive = true;
+    GetWorldTimerManager().SetTimer(DoubleDamageTimer, this, &ATank::ResetDoubleDamage, 3.0f, false);
+}
+
+void ATank::ResetDoubleDamage()
+{
+    bIsDoubleDamageActive = false;
 }
