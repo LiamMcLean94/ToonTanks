@@ -16,7 +16,9 @@ class TOONTANKS_API AToonTanksPlayerController : public APlayerController
 
 
 public:
-
+	virtual void SetupInputComponent() override;
+	
 	void SetPlayerEnabledState(bool bPlayerEnabled);
+	void TogglePauseMenu();
 	
 };

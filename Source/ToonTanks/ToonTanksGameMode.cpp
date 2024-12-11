@@ -46,9 +46,9 @@ void AToonTanksGameMode::HandleGameStart()
 	Tank = Cast<ATank>(UGameplayStatics::GetPlayerPawn(this, 0));
 	ToonTanksPlayerController = Cast<AToonTanksPlayerController>(UGameplayStatics::GetPlayerController(this, 0));
 
-	StartGame();
+	//sStartGame();
 
-	if (ToonTanksPlayerController)
+	/*if (ToonTanksPlayerController)
 	{
 		ToonTanksPlayerController->SetPlayerEnabledState(false);
 
@@ -56,7 +56,7 @@ void AToonTanksGameMode::HandleGameStart()
 		FTimerDelegate PlayerEnableTimerDelegate = FTimerDelegate::CreateUObject(ToonTanksPlayerController, &AToonTanksPlayerController::SetPlayerEnabledState, true);
 
 		GetWorldTimerManager().SetTimer(PlayerEnableTimerHandle, PlayerEnableTimerDelegate, StartDelay, false);
-	}
+	}*/
 }
 
 int32 AToonTanksGameMode::GetTargetTowerCount()

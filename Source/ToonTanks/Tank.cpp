@@ -58,7 +58,7 @@ void ATank::BeginPlay()
 	Super::BeginPlay();
 
     TankPlayerController = Cast<APlayerController>(GetController());
-
+    
     
 	
 }
